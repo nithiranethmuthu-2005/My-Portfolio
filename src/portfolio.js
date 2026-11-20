@@ -1,0 +1,24 @@
+const media = import.meta.glob(['../grapic design/**/*.{jpg,jpeg}', '../videography and editing/**/*.mp4', './category-covers/**/*.png'], { eager: true, query: '?url', import: 'default' });
+const asset = (path) => media[path];
+
+const sport = [['POST.jpg', 'Match day poster'], ['final post.jpg', 'Finals announcement'], ['champion.jpg', 'Champions celebration'], ['2025 netball pirimi.jpg', 'Netball campaign'], ['2025 district kabbadi.jpg', 'District kabaddi campaign']];
+const festival = [['wap poya 2024.jpg', 'Vap Poya'], ['SAVE_20250426_233354.jpg', 'Cultural celebration'], ['SAVE_20250421_225451.jpg', 'Festival artwork'], ['SAVE_20230928_233626.jpg', 'Seasonal greeting'], ['new year.jpg', 'Sinhala & Tamil New Year'], ['Merry Christmas Post.jpg', 'Christmas greeting'], ['kumariya.jpg', 'Kumariya campaign'], ['Independence Day.jpg', 'Independence Day'], ['2.jpg', 'National occasion']];
+const everyday = [['2023.jpeg', 'Everyday campaign'], ['cmyk banner.jpg', 'CMYK banner'], ['Black Best Of The Best Product Sale Instagram Post (1).jpg', 'Product sale post']];
+const entertainment = [['Untitled-2.jpg', 'Event visual'], ['Untitled-1.jpg', 'Show artwork'], ['post 9.jpg', 'Entertainment post'], ['nilan hettiarachchi.jpg', 'Artist promotion'], ['musical show 4.jpg', 'Musical show'], ['dabahena new fb post portrait copy.jpg.jpeg', 'Dabahena promotion'], ['2025 musical before 2.jpg', 'Musical campaign']];
+
+const designCollection = (id, title, description, files, folder, cover) => ({ id, title, kind: 'Graphic Design', description, cover: asset(cover.startsWith('.') ? cover : `../grapic design/${folder}/${files[0][0]}`), items: files.map(([file, name]) => ({ title: name, description: `${title} — graphic design created for a clear, scroll-stopping social presence.`, image: asset(`../grapic design/${folder}/${file}`) })) });
+
+export const designCollections = [
+  designCollection('sports', 'Sports Posts', 'Campaigns, score updates, match posters, and winning moments.', sport, 'sport post', './category-covers/sports-design-cover.png'),
+  designCollection('festivals', 'National Festivals', 'Celebratory visual stories for national and cultural occasions.', festival, 'national festival', './category-covers/festivals-design-cover.png'),
+  designCollection('everyday', 'Everyday Events', 'Promotional pieces and day-to-day visual communication.', everyday, 'every day event', './category-covers/everyday-design-cover.png'),
+  designCollection('entertainment-design', 'Entertainment Posts', 'Bold artwork made to build anticipation and an audience.', entertainment, 'entertaiment post', './category-covers/entertainment-design-cover.png'),
+];
+
+const videoCollection = (id, title, description, cover, files, folder, thumbnails) => ({ id, title, kind: 'Videography & Editing', description, cover: asset(cover.startsWith('.') ? cover : `../grapic design/${cover}`), items: files.map(([file, name], index) => ({ title: name, description: `${title} — filmed and edited to carry the energy of the moment.`, video: asset(`../videography and editing/${folder}/${file}`), image: asset(`../grapic design/${thumbnails[index]}`) })) });
+
+export const videoCollections = [
+  videoCollection('entertainment-video', 'Entertainment', 'Show highlights, event energy, and memorable performances.', './category-covers/entertainment-video-cover.png', [['fiona .mp4', 'Fiona'], ['After movie .mp4', 'After Movie'], ['alokana 2.mp4', 'Alokana II'], ['alokana 1.mp4', 'Alokana I'], ['dawasak .mp4', 'Dawasak'], ['DAWASAK Yuki 2.mp4', 'Dawasak Yuki'], ['1.mp4', 'Live performance']], 'enetertaiment', ['entertaiment post/Untitled-2.jpg', 'entertaiment post/Untitled-1.jpg', 'entertaiment post/post 9.jpg', 'entertaiment post/nilan hettiarachchi.jpg', 'entertaiment post/musical show 4.jpg', 'entertaiment post/dabahena new fb post portrait copy.jpg.jpeg', 'entertaiment post/2025 musical before 2.jpg']),
+  videoCollection('day-events', 'Day-to-Day Events', 'Event recaps made for people who want to relive the atmosphere.', './category-covers/day-events-video-cover.png', [['Momentem AfterMovie.mp4', 'Momentem AfterMovie'], ['main.mp4', 'Event highlights'], ['6.mp4', 'Moment 06'], ['5.mp4', 'Moment 05'], ['4.mp4', 'Moment 04'], ['3.mp4', 'Moment 03'], ['2.mp4', 'Moment 02']], 'day to day event', ['every day event/2023.jpeg', 'every day event/cmyk banner.jpg', 'every day event/Black Best Of The Best Product Sale Instagram Post (1).jpg', 'national festival/new year.jpg', 'national festival/Merry Christmas Post.jpg', 'national festival/kumariya.jpg', 'national festival/Independence Day.jpg']),
+  videoCollection('editing', 'Editing Only', 'Footage transformed through pacing, colour, sound, and story.', './category-covers/editing-video-cover.png', [['show video 1.mp4', 'Showreel edit'], ['0423.mp4', 'Social edit 0423'], ['2026.mp4', '2026 edit']], 'editing only', ['sport post/POST.jpg', 'sport post/final post.jpg', 'sport post/champion.jpg']),
+];
